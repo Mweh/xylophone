@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(myApp());
@@ -12,11 +14,7 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.indigo,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Xylophone App'),
-        ),
+        backgroundColor: Colors.black,
         body: xyloApp(),
       ),
     );
@@ -38,75 +36,38 @@ class _xyloAppState extends State<xyloApp> {
     });
   }
 
+  void greet(String name) {
+    print('Hello $name');
+  }
+
+  Expanded buildKey({required Color color, required int soundNumber}) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          notePlay(soundNumber);
+        },
+        child: Container(
+          color: color,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-          onPressed: () {
-            notePlay(1);
-          },
-          child: Container(
-            color: Colors.red,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(2);
-          },
-          child: Container(
-            color: Colors.orange,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(3);
-          },
-          child: Container(
-            color: Colors.yellow,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(4);
-          },
-          child: Container(
-            color: Colors.green,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(5);
-          },
-          child: Container(
-            color: Colors.teal,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(6);
-          },
-          child: Container(
-            color: Colors.blue,
-            height: 95,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            notePlay(7);
-          },
-          child: Container(
-            color: Colors.purple,
-            height: 95,
-          ),
-        ),
-      ],
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          buildKey(color: Colors.red, soundNumber: 1),
+          buildKey(color: Colors.orange, soundNumber: 2),
+          buildKey(color: Colors.yellow, soundNumber: 3),
+          buildKey(color: Colors.green, soundNumber: 4),
+          buildKey(color: Colors.teal, soundNumber: 5),
+          buildKey(color: Colors.blue, soundNumber: 6),
+          buildKey(color: Colors.purple, soundNumber: 7),
+        ],
+      ),
     );
   }
 }
